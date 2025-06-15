@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <title>Frontend Mentor | Contact form</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    
+    body{
+    font-family: 'Karla', sans-serif;
+    font-size:small;
+    background-color: hsl(148, 38%, 91%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap:10px;
+    min-height: 100vh;
+    }
+
+    .container{
+      background-color: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    
+    h2{
+      margin: 0;
+    }
+
+    .name{
+      display:flex;
+      gap:1rem
+    }
+
+    .flexor{
+      display: flex;
+      flex-direction: column;
+    }
+    
+    label{
+      margin-bottom: 0.5rem;
+      margin-top: 1rem;
+      color: hsl(187, 24%, 22%);
+    }
+
+    .required::after {
+      content: " *";
+      color: hsl(169, 82%, 27%);
+    }
+
+    input,textarea{
+      padding: 0.55rem;
+      border: 1px solid hsl(186, 15%, 59%);
+      border-radius: 6px;
+      font-size: small;
+      margin-bottom:0.5rem;
+    }
+
+    .radio-group{
+      display: flex;
+      gap:1rem;
+    }
+
+    .radio-group label{
+      border: 1px solid hsl(186, 15%, 59%);
+      border-radius: 8px;
+      padding: 0.45rem;
+      cursor: pointer;
+      width: 48%;
+      margin-top: 0;
+    }
+
+    .radio-group label:hover{
+      border: 1px solid  hsl(169, 82%, 27%);
+      background-color: hsl(148, 38%, 91%);
+    }
+
+    .radio-group label:has(input:checked) {
+      border: 1px solid hsl(169, 82%, 27%);
+      background-color: hsl(148, 38%, 91%);
+    }
+    
+    .radio-group label input{
+      margin-right: 0.5rem;
+      accent-color: hsl(169, 82%, 27%);
+
+    }
+
+    .checkbox{
+      margin-top: 0.5rem;
+    }
+
+    .checkbox input[type="checkbox"] {
+      accent-color: hsl(169, 82%, 27%);
+      border: 1px solid hsl(186, 15%, 59%); 
+      border-radius: 4px; 
+      margin-right: 0.5rem;
+    }
+
+    .submit-btn{
+      width: 100%;
+      display: block;
+      text-align: center;
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: none;
+      background-color: hsl(169, 82%, 27%);
+      color: white;
+      font-weight:500;
+      margin-top:1rem ;
+      cursor: pointer;
+    }
+
+    button:hover {
+    background-color: hsl(169, 82%, 15%);
+    }
+
+    input:hover,
+    textarea:hover,
+    input:focus,
+    textarea:focus,
+    input:active,
+    textarea:active {
+      border: 1px solid hsl(169, 82%, 27%) !important;
+      outline: none;
+    }
+
+
+    .error-message{
+      color: hsl(0, 66%, 54%);
+      display: none;
+    }
+
+    .show-error .error-message {
+      display: block;
+    }
+
+
+    .sucess-alert{
+      display: none;
+        position: absolute;
+        background-color: hsl(187, 24%, 22%);
+        color: hsl(0, 0%, 100%);
+        padding:0.5rem;
+        border: none;
+        border-radius: 8px;
+        width: 80%;
+        top: -65px;
+        left: 40px;
+
+    }
+
+    .show-sucess .sucess-alert{
+      display: block;
+    }
+
+    @media(min-width: 1024px){
+    .sucess-alert {
+      left: 9%;
+      top: -90px;
+      }
+    }
+
+    @media(max-width:768px){
+      .container{
+        padding: 1rem;
+        max-width: 90%;
+      }
+
+      .name{
+        display: flex;
+        flex-direction: column;
+        gap:0;
+      }
+
+      .radio-group{
+        flex-direction: column;
+        gap:0;
+      }
+      
+      .radio-group label{
+        width: 93%;
+      }
+       .sucess-alert {
+      left: 9%;
+      top: -25px;
+      }
+    }
+
+
+
+
+    
+    
+  </style>
+</head>
+<body>
+ <div class="container">
+    <div class="sucess-alert">
+      <h3> ✔ Message Sent! </h3>
+      <p>Thanks for completing the form. We'll be in touch soon!</p>
+     
+    </div>
+    <h2>Contact Us</h2>
+
+    <form action="#" method="POST" id="contactForm" onsubmit="return validateForm(event)">
+      <div class="name">
+        <div class="flexor ">
+          <label for="first-name" class="required">First Name</label>
+          <input type="text" id="first-name" name="firstName" >
+          <span class="error-message">This field is required</span>
+        </div>
+        
+        <div class="flexor">
+          <label for="last-name" class="required">Last Name</label>
+          <input type="text" id="last-name" name="lastName" >
+          <span class="error-message">This field is required</span>
+        </div>
+      </div>
+
+      <div class="flexor">
+
+        <label for="email" class="required" >Email Address</label>
+        <input type="email" id="email" name="email" >
+        <span class="error-message">Please enter a valid email address</span>
+      </div>
+
+      <div class="flexor" id="queryGroup">
+        <label class="required">Query Type</label>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="query" value="General" >
+            General Enquiry
+          </label>
+          <label>
+            <input type="radio" name="query" value="Support">
+            Support Request
+          </label>
+        </div>
+        <span class="error-message">Please select a query type</span>
+      </div>
+
+
+      <div class="flexor">
+        <label for="message" class="required">Message</label>
+        <textarea id="message" name="message" rows="4" ></textarea>
+        <span class="error-message">This field is required</span>
+      </div>
+
+      <div class="checkbox" id="checkbox">
+        <label class="required">
+          <input type="checkbox" name="consent">
+          I consent to being contacted by the team
+        </label>
+        <span class="error-message">To submit this form, please consent to being contacted</span>
+      </div>
+
+      <button class="submit-btn" type="submit">Submit</button>
+
+    </form>
+  </div>
+  
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
+    Coded by <a href="https://www.rohankatwal.com.np/">Rohan Katwal</a>.
+  </div>
+
+
+<script>
+  function validateForm(event) {
+    event.preventDefault();
+
+    let valid = true;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+    // Clear all previous error displays
+    document.querySelectorAll('.flexor, .checkbox, .radio-group').forEach(el =>
+      el.classList.remove('show-error')
+    );
+
+    // First Name
+    const firstName = document.getElementById('first-name');
+    if (!firstName.value.trim()) {
+      document.querySelector('.name .flexor:first-child').classList.add('show-error');
+      valid = false;
+    }
+
+    const lastName=document.getElementById('last-name')
+    if(!lastName.value.trim()){
+      document.querySelector('.name .flexor:last-child').classList.add('show-error')
+    }
+
+    const email=document.getElementById('email')
+      if (!emailRegex.test(email.value.trim())) {
+        email.closest('.flexor').classList.add('show-error');
+        valid = false;
+      }
+
+    if (!document.querySelector('input[name="query"]:checked')) {
+        document.getElementById('queryGroup').classList.add('show-error');
+        valid = false;
+      }
+
+    const message=document.getElementById('message')
+      if(!message.value.trim()){
+        message.closest('.flexor').classList.add('show-error');
+        valid = false;
+      }
+
+    const checkbox=document.querySelectorAll('input[name="consent"]:checked')
+    if(checkbox.length===0){
+      document.getElementById('checkbox').classList.add('show-error')
+      valid=false
+    }
+
+
+      if (valid) {
+      document.querySelector('.container').classList.add('show-sucess');
+        setTimeout(() => {
+          document.querySelector('.container').classList.remove('show-sucess');
+          document.getElementById('contactForm').reset();
+        }, 3000); 
+    }
+
+
+    
+
+  }
+</script>
+
+</body>
+</html>
